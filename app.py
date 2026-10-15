@@ -44,9 +44,9 @@ def _pre_calculo():
 
 _pre_calculo()
 
-t1, t2, t3 = st.columns([4, 2, 1], vertical_alignment="bottom")
+t1, t2, t3 = st.columns([3, 3, 1], vertical_alignment="bottom")
 t1.markdown("### Emissão parcelada SABRE")
-t2.link_button("Consultar financiamentos das cias", LINK_FINANCIAMENTOS, use_container_width=True)
+t2.link_button("Consultar sobre o parcelamento das cias e suas condições", LINK_FINANCIAMENTOS, use_container_width=True)
 t3.button("Limpar campos", on_click=_limpar, use_container_width=True)
 
 dados, slots = {}, {}
