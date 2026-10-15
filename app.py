@@ -8,6 +8,12 @@ st.markdown(
     .block-container {padding-top: 3.2rem; padding-bottom: 1rem;}
     div[data-testid="stVerticalBlock"] {gap: 0.35rem;}
     div[data-testid="stCaptionContainer"] {margin-top: -0.3rem;}
+    div[data-testid="stLinkButton"] a, a[data-testid^="stBaseLinkButton"], a[data-testid="stLinkButton"] {
+        background-color: #1f6feb; border-color: #1f6feb; color: #ffffff;
+    }
+    div[data-testid="stLinkButton"] a:hover, a[data-testid^="stBaseLinkButton"]:hover, a[data-testid="stLinkButton"]:hover {
+        background-color: #388bfd; border-color: #388bfd; color: #ffffff;
+    }
     </style>""",
     unsafe_allow_html=True,
 )
@@ -46,7 +52,7 @@ _pre_calculo()
 
 t1, t2, t3 = st.columns([3, 3, 1], vertical_alignment="bottom")
 t1.markdown("### Emissão parcelada SABRE")
-t2.link_button("Consultar sobre o parcelamento das cias e suas condições", LINK_FINANCIAMENTOS, use_container_width=True)
+t2.link_button("Consultar sobre o parcelamento das cias e suas condições", LINK_FINANCIAMENTOS, type="primary", use_container_width=True)
 t3.button("Limpar campos", on_click=_limpar, use_container_width=True)
 
 dados, slots = {}, {}
