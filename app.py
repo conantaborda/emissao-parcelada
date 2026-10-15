@@ -8,11 +8,20 @@ st.markdown(
     .block-container {padding-top: 3.2rem; padding-bottom: 1rem;}
     div[data-testid="stVerticalBlock"] {gap: 0.35rem;}
     div[data-testid="stCaptionContainer"] {margin-top: -0.3rem;}
+    /* Botão de consulta: tom suave com borda de destaque */
     div[data-testid="stLinkButton"] a, a[data-testid^="stBaseLinkButton"], a[data-testid="stLinkButton"] {
-        background-color: #1f6feb; border-color: #1f6feb; color: #ffffff;
+        background-color: rgba(31, 111, 235, 0.14); border: 1px solid #1f6feb;
     }
     div[data-testid="stLinkButton"] a:hover, a[data-testid^="stBaseLinkButton"]:hover, a[data-testid="stLinkButton"]:hover {
-        background-color: #388bfd; border-color: #388bfd; color: #ffffff;
+        background-color: rgba(31, 111, 235, 0.28); border-color: #388bfd;
+    }
+    /* Comando gerado: destaque verde, fonte maior, para não se confundir com os campos */
+    div[data-testid="stCode"] {
+        border: 2px solid #2ea043; border-radius: 8px; background: rgba(46, 160, 67, 0.12);
+    }
+    div[data-testid="stCode"] pre, div[data-testid="stCode"] code {
+        background: transparent !important; font-size: 1.05rem; font-weight: 600;
+        white-space: pre-wrap; word-break: break-all;
     }
     </style>""",
     unsafe_allow_html=True,
@@ -52,7 +61,7 @@ _pre_calculo()
 
 t1, t2, t3 = st.columns([3, 3, 1], vertical_alignment="bottom")
 t1.markdown("### Emissão parcelada SABRE")
-t2.link_button("Consultar sobre o parcelamento das cias e suas condições", LINK_FINANCIAMENTOS, type="primary", use_container_width=True)
+t2.link_button("Consultar sobre o parcelamento das cias e suas condições", LINK_FINANCIAMENTOS, use_container_width=True)
 t3.button("Limpar campos", on_click=_limpar, use_container_width=True)
 
 dados, slots = {}, {}
@@ -108,6 +117,7 @@ for key, status in validar(dados).items():
 with saida1.container():
     cmd1 = comando_autorizacao(dados)
     if cmd1:
+        st.caption(":green[✓ Comando pronto — copie pelo ícone à direita]")
         st.code(cmd1, language=None)  # botão de copiar embutido
     else:
         st.info("Preencha os campos da etapa 1 para gerar o comando.")
@@ -115,6 +125,7 @@ with saida1.container():
 with saida2.container():
     cmd2 = comando_emissao(dados)
     if cmd2:
+        st.caption(":green[✓ Comando pronto — copie pelo ícone à direita]")
         st.code(cmd2, language=None)
     elif not etapa1_ok(dados):
         st.info("Conclua a etapa 1 primeiro.")
